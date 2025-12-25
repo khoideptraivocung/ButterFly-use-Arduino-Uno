@@ -80,11 +80,19 @@ void loop() {
   int flapLow = map(ch3Value, 1000, 2000, flapLowMin, flapLowMax);     // thấp nhất
   int flapHigh = map(ch3Value, 1000, 2000, flapHighMin, flapHighMax); // cao nhất
   
-  // mo them bien do khi len den 1800
   if (ch3Value > 1800) {
-      flapLow  -= 8;   // mở xuống thêm
-      flapHigh += 8;   // mở lên thêm
+    speedDelay = speedDelayHigh;
   }
+  
+  if (ch3Value > 1800) {
+    flapLow  -= 8;   // mở xuống thêm
+    flapHigh += 8;   // mở lên thêm
+  }
+  
+  flapLow  = constrain(flapLow,  10, 170);
+  flapHigh = constrain(flapHigh, 10, 170);
+
+  
   // ==== Vỗ cánh khi ga > 1050 ====
   if (ch3Value > 1050) {
     if (now - lastUpdate >= speedDelay) {
